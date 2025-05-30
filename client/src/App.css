@@ -153,3 +153,18 @@ div.post-page a.edit-btn{
 a svg{
     height:20px;
 }
+div.post-page .delete-btn{
+background-color: #333;
+display: inline-flex;
+align-items: center;
+gap: 65px;
+height: 45px;
+width: 20%;
+color: #fff;
+padding:15px 30px;
+border-radius: 5px;
+text-decoration: none;
+}
+a svg{
+    height:20px;
+}
