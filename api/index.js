@@ -9,10 +9,12 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config();
+
 
 const app = express();
 const salt = bcrypt.genSaltSync(10);
-const secret = 'asdfe45we45w345wegw345werjktjwertkj';
+const secret = process.env.JWT_SECRET;
 
 // Configure Multer
 const uploadMiddleware = multer({ dest: 'uploads/' });
@@ -25,9 +27,9 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Connect to MongoDB
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb+srv://shresthasandesh991:mongom1na@cluster0.ddew8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('Failed to connect to MongoDB', err));
+  .catch(err => console.error('Failed to connect to MongoDB',err));
 
 // Routes
 app.post('/register', async (req, res) => {
@@ -189,7 +191,6 @@ app.delete('/post/:id', async (req, res) => {
     res.status(500).json({ message: 'An error occurred while deleting the post' });
   }
 });
-
 
 
 
